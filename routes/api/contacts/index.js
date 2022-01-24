@@ -14,22 +14,23 @@ import {
   validationUpdateFavorite,
 } from "../../../middlewares/validation.js";
 
+import guard from "../../../middlewares/guard";
+
 const router = express.Router();
 
-router.get("/", getContacts);
+router.get("/", guard, getContacts);
 
-router.get("/:id", validationId, getContactById);
+router.get("/:id", [guard, validationId], getContactById);
 
-router.post("/", validationCreate, addContact);
+router.post("/", [guard, validationCreate], addContact);
 
-router.delete("/:id", validationId, removeContact);
+router.delete("/:id", [guard, validationId], removeContact);
 
-router.put("/:id", validationId, validationUpdate, updateContact);
+router.put("/:id", [guard, validationId, validationUpdate], updateContact);
 
 router.patch(
   "/:id/favorite",
-  validationId,
-  validationUpdateFavorite,
+  [guard, validationId, validationUpdateFavorite],
   updateContact
 );
 
