@@ -14,5 +14,13 @@ const create = async (body) => {
 const updateToken = async (id, token) => {
   return await User.updateOne({ _id: id }, { token });
 };
+const update = async (id, email, password, subscription) => {
+  const result = await User.findOneAndUpdate(
+    { _id: id },
+    { user: { email, password, subscription } },
+    { new: true }
+  );
+  return result;
+};
 
-export default { findById, findByEmail, create, updateToken };
+export default { findById, findByEmail, create, updateToken, update };
