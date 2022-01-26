@@ -19,10 +19,10 @@ const updateAvatar = async (id, avatarURL) => {
   return await User.updateOne({ _id: id }, { avatarURL });
 };
 
-const update = async (id, email, password, subscription) => {
+const update = async (id, email, password, subscription, avatarURL) => {
   const result = await User.findOneAndUpdate(
     { _id: id },
-    { user: { email, password, subscription } },
+    { user: { email, password, subscription, avatarURL } },
     { new: true }
   );
   return result;

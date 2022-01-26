@@ -3,10 +3,10 @@ import multer from "multer";
 const UPLOAD_DIR = process.env.UPLOAD_DIR;
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function (_req, _file, cb) {
     cb(null, UPLOAD_DIR);
   },
-  filename: function (req, file, cb) {
+  filename: function (_req, file, cb) {
     const uniqueSuffix = Date.now();
     cb(null, `${uniqueSuffix.toString()}_${file.originalname}`);
   },

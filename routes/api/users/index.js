@@ -13,6 +13,6 @@ router.post("/login", authControllers.login);
 router.post("/logout", guard, authControllers.logout);
 router.get("/current", guard, authControllers.current);
 
-router.patch("/avatar", guard, upload.single("avatar"), uploadAvatar);
+router.patch("/avatar", guard, upload.single("avatarURL"), uploadAvatar);
 
 export default router;

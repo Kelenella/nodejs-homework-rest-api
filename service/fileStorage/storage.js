@@ -8,8 +8,8 @@ class FileStorage {
 
   async updateAvatar() {
     await this.transformAvatar(this.pathFile);
-    const userUrlAvatar = await this.storage.save();
-    return userUrlAvatar;
+    const avatarUrl = await this.storage.save();
+    return avatarUrl;
   }
 
   async transformAvatar(pathFile) {

@@ -1,10 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { HttpCode } from "../../lib/constants";
-import {
-  UploadFileService,
-  LocalFileStorage,
-  CloudFileStorage,
-} from "../../service/fileStorage";
+import { UploadFileService, LocalFileStorage } from "../../service/fileStorage";
 
 const uploadAvatar = async (req, res, next) => {
   const uploadService = new UploadFileService(
