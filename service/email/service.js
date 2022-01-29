@@ -5,7 +5,7 @@ class EmailService {
 
     switch (env) {
       case "development":
-        this.link = "https://1e09-188-163-102-225.ngrok.io";
+        this.link = "https://27ae-188-163-102-225.ngrok.io";
         break;
       case "test ":
         this.test = "http://localhost:5000/";
@@ -18,7 +18,7 @@ class EmailService {
     }
   }
 
-  createEmailTemplate(username, verifyToken) {
+  createEmailTemplate(verifyToken) {
     const mailGenerator = new Mailgen({
       theme: "default",
       product: {
@@ -28,7 +28,7 @@ class EmailService {
     });
     const email = {
       body: {
-        name: username,
+        name: "Dear friend",
         intro: "Welcome! We're very excited to have you on board.",
         action: {
           instructions: "To get started with our API, please click here:",

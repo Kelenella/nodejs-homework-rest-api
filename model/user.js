@@ -1,7 +1,7 @@
 import pkg from "mongoose";
 import bcrypt from "bcryptjs";
 import gravatar from "gravatar";
-import { v4 as uuidv4 } from "uuid";
+import crypto from "crypto";
 
 const { Schema, model } = pkg;
 
@@ -47,7 +47,7 @@ const userSchema = new Schema(
     verificationToken: {
       type: String,
       required: [true, "Verify token is required"],
-      default: uuidv4(),
+      default: crypto.randomUUID(),
     },
   },
   {
