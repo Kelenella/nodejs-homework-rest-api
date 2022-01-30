@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import repositoryUsers from "../../repository/users";
+
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 class AuthService {
@@ -9,16 +10,15 @@ class AuthService {
   }
 
   async create(body) {
-    const { id, email, subscription, avatarURL } = await repositoryUsers.create(
-      body
-    );
-    return { id, email, subscription, avatarURL };
+    const { id, email, subscription, avatarURL, verificationToken } =
+      await repositoryUsers.create(body);
+    return { id, email, subscription, avatarURL, verificationToken };
   }
 
   async getUser(email, password) {
     const user = await repositoryUsers.findByEmail(email);
     const isValidPassword = await user?.isValidPassword(password);
-    if (!isValidPassword) {
+    if (!isValidPassword || !user?.verify) {
       return null;
     }
     return user;
@@ -32,7 +32,7 @@ class AuthService {
   getToken(user) {
     const { id, email } = user;
     const payload = { id, email };
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "8h" });
     return token;
   }
 
@@ -41,4 +41,4 @@ class AuthService {
   }
 }
 
-export default AuthService;
+export default new AuthService();
